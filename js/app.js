@@ -15,9 +15,9 @@ var Enemy = function (x, y, speed) {
 Enemy.prototype.update = function (dt) {
   // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
   // 都是以同样的速度运行的
-  console.log(dt)
-  this.x += this.speed * dt
-  this.repeat()
+  console.log(dt);
+  this.x += this.speed * dt;
+  this.repeat();
 };
 
 // 此为游戏必须的函数，用来在屏幕上画出敌人，
@@ -27,8 +27,8 @@ Enemy.prototype.render = function () {
 
 // 重复出现
 Enemy.prototype.repeat = function () {
-  if(this.x > 500) {
-    this.x = -100
+  if (this.x > 500) {
+    this.x = -100;
   }
 };
 
@@ -51,6 +51,12 @@ Player.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+Player.prototype.checkWin = function () {
+  if (this.y < 50) {
+    return alert('win~')
+  }
+}
+
 // 处理键盘控制
 Player.prototype.handleInput = function (key) {
   var hash = {
@@ -58,27 +64,28 @@ Player.prototype.handleInput = function (key) {
     right: handleRight,
     up: handleUp,
     down: handleDown
-  }
-  if(hash[key]){
-    hash[key](this)
-    this.render()
+  };
+  if (hash[key]) {
+    hash[key](this);
+    this.render();
+    this.checkWin();
   }
 
   function handleLeft(scope) {
-    scope.x -= 100
-    scope.x = Math.max(scope.x, 0)
+    scope.x -= 100;
+    scope.x = Math.max(scope.x, 0);
   }
   function handleRight(scope) {
-    scope.x += 100
-    scope.x = Math.min(scope.x, 400)
+    scope.x += 100;
+    scope.x = Math.min(scope.x, 400);
   }
   function handleUp(scope) {
-    scope.y -= 83
-    scope.y = Math.max(scope.y, -10)
+    scope.y -= 83;
+    scope.y = Math.max(scope.y, -10);
   }
   function handleDown(scope) {
-    scope.y += 83
-    scope.y = Math.min(scope.y, 400)
+    scope.y += 83;
+    scope.y = Math.min(scope.y, 400);
   }
 }
 
