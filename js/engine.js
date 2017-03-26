@@ -19,6 +19,8 @@ var Engine = (function (global) {
     win = global.window,
     canvas = doc.createElement('canvas'),
     ctx = canvas.getContext('2d'),
+    collisionX = 50,
+    collisionY = 50,
     lastTime;
 
   canvas.width = 505;
@@ -82,7 +84,7 @@ var Engine = (function (global) {
   // 碰撞检测函数
   function checkCollisions() {
     allEnemies.forEach(function (enemy) {
-      if(Math.abs(enemy.x - player.x) < 50 && Math.abs(enemy.y - player.y) < 50){
+      if(Math.abs(enemy.x - player.x) < collisionX && Math.abs(enemy.y - player.y) < collisionY){
         reset();
       }
     })

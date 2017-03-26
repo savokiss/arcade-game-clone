@@ -7,7 +7,6 @@ var Enemy = function (x, y, speed) {
   this.speed = speed || 100;
   // 敌人的图片或者雪碧图，用一个我们提供的工具函数来轻松的加载文件
   this.sprite = 'images/enemy-bug.png';
-
 };
 
 // 此为游戏必须的函数，用来更新敌人的位置
@@ -15,7 +14,6 @@ var Enemy = function (x, y, speed) {
 Enemy.prototype.update = function (dt) {
   // 你应该给每一次的移动都乘以 dt 参数，以此来保证游戏在所有的电脑上
   // 都是以同样的速度运行的
-  console.log(dt);
   this.x += this.speed * dt;
   this.repeat();
 };
@@ -25,7 +23,7 @@ Enemy.prototype.render = function () {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// 重复出现
+// 让bug重复出现
 Enemy.prototype.repeat = function () {
   if (this.x > 500) {
     this.x = -100;
@@ -37,30 +35,37 @@ Enemy.prototype.repeat = function () {
 var Player = function () {
   this.x = 200;
   this.y = 380;
+  this.hasWon = false;
   this.sprite = 'images/char-boy.png'
 }
 
 // 更新玩家
 Player.prototype.update = function (dt) {
-  console.log('dt', dt)
+  // TODO
 }
 
-//渲染玩家
+// 渲染玩家
 Player.prototype.render = function () {
-  console.log(this.x, this.y)
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
+// 胜利检测函数
 Player.prototype.checkWin = function () {
-  // if (this.y < 50) {
-  //   return alert('win~')
-  // }
+  if (this.y < 10 && !this.hasWon) {
+    this.hasWon = true;
+    setTimeout(function(){
+      if(confirm('Win~ start again?')){
+        this.reset();
+      }
+    }.bind(this), 500);
+  }
 }
 
 // 玩家重置到初始位置
 Player.prototype.reset = function () {
   this.x = 200;
   this.y = 380;
+  this.hasWon = false;
 }
 
 // 处理键盘控制
@@ -110,6 +115,5 @@ document.addEventListener('keyup', function (e) {
     39: 'right',
     40: 'down'
   };
-
   player.handleInput(allowedKeys[e.keyCode]);
 });
