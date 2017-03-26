@@ -60,7 +60,7 @@ Player.prototype.checkWin = function () {
         // 用户确认后游戏重新开始
         this.reset();
       }
-    }.bind(this), 500);
+    }.bind(this), 100);
   }
 }
 
