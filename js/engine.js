@@ -85,6 +85,7 @@ var Engine = (function (global) {
   function checkCollisions() {
     allEnemies.forEach(function (enemy) {
       if(Math.abs(enemy.x - player.x) < collisionX && Math.abs(enemy.y - player.y) < collisionY){
+        // 碰撞后游戏重新开始
         reset();
       }
     })

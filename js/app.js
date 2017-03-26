@@ -50,11 +50,14 @@ Player.prototype.render = function () {
 }
 
 // 胜利检测函数
+// hasWon 为是否通关辅助变量，用来防止用户点击取消后重复弹框
 Player.prototype.checkWin = function () {
   if (this.y < 10 && !this.hasWon) {
     this.hasWon = true;
+    // 延时弹窗提示用户已通关
     setTimeout(function(){
       if(confirm('Win~ start again?')){
+        // 用户确认后游戏重新开始
         this.reset();
       }
     }.bind(this), 500);
@@ -70,18 +73,22 @@ Player.prototype.reset = function () {
 
 // 处理键盘控制
 Player.prototype.handleInput = function (key) {
+  // 键盘操作映射map
   var hash = {
     left: handleLeft,
     right: handleRight,
     up: handleUp,
     down: handleDown
   };
+  // 处理键盘操作逻辑
   if (hash[key]) {
     hash[key](this);
     this.render();
+    // 此处检测是否通关
     this.checkWin();
   }
 
+  // 键盘操作绑定函数
   function handleLeft(scope) {
     scope.x -= 100;
     scope.x = Math.max(scope.x, 0);
