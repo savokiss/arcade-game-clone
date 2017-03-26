@@ -1,3 +1,9 @@
 body {
     text-align: center;
 }
+
+.switch {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+}

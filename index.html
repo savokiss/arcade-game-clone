@@ -6,8 +6,22 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <button class="switch">关灯</button>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+    <script>
+      var switchBtn = document.querySelector('.switch');
+      var body = document.querySelector('body');
+      switchBtn.onclick = function(){
+        if(this.innerHTML == '关灯'){
+          body.style.backgroundColor = 'black';
+          this.innerHTML = '开灯';
+        } else {
+          body.style.backgroundColor = 'white';
+          this.innerHTML = '关灯';
+        }
+      }
+    </script>
 </body>
 </html>
