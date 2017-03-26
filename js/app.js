@@ -52,9 +52,15 @@ Player.prototype.render = function () {
 }
 
 Player.prototype.checkWin = function () {
-  if (this.y < 50) {
-    return alert('win~')
-  }
+  // if (this.y < 50) {
+  //   return alert('win~')
+  // }
+}
+
+// 玩家重置到初始位置
+Player.prototype.reset = function () {
+  this.x = 200;
+  this.y = 380;
 }
 
 // 处理键盘控制
