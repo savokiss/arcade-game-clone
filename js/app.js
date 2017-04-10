@@ -36,7 +36,7 @@ var Player = function () {
   this.x = 200;
   this.y = 380;
   this.hasWon = false;
-  this.sprite = 'images/char-boy.png'
+  this.sprite = 'images/char-boy.png';
 }
 
 // 更新玩家
